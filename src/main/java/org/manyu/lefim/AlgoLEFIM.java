@@ -35,6 +35,8 @@ import java.util.List;
  */
 public class AlgoLEFIM {
 
+	int minLength,maxLength;
+
 	/** the set of high-utility itemsets */
     private Itemsets highUtilityItemsets;
     
@@ -136,9 +138,12 @@ public class AlgoLEFIM {
 		
 		// read the input file
 		Dataset dataset = new Dataset(inputPath, maximumTransactionCount);
+		dataset.pruneSmallTransactions(minLength);
 
 		// save minUtil value selected by the user
 		this.minUtil = minUtil;
+		this.minLength=minLength;
+		this.maxLength=maxLength;
 
 		// if the user choose to save to file
 		// create object for writing the output file
@@ -610,7 +615,7 @@ public class AlgoLEFIM {
 	        temp[prefixLength] = newNamesToOldNames[e];
      
 	        // if the utility of PU{e} is enough to be a high utility itemset
-	        if(utilityPe  >= minUtil)
+	        if(utilityPe  >= minUtil && prefixLength+1>=minLength)
 	        {
 	        	// output PU{e}
 	        	output(prefixLength, utilityPe );
@@ -622,16 +627,16 @@ public class AlgoLEFIM {
 			
 	        // we now record time for identifying promising items
 			long initialTime = System.currentTimeMillis();
-			
+
 			// We will create the new list of secondary items
 			List<Integer> newItemsToKeep = new ArrayList<Integer>();
 			// We will create the new list of primary items
 			List<Integer> newItemsToExplore = new ArrayList<Integer>();
-			
+
 			// for each item
 	    	for (int k = j+1; k < itemsToKeep.size(); k++) {
 	        	Integer itemk =  itemsToKeep.get(k);
-	        	
+
 	        	// if the sub-tree utility is no less than min util
 	            if(utilityBinArraySU[itemk] >= minUtil) {
 	            	// and if sub-tree utility pruning is activated
@@ -654,10 +659,12 @@ public class AlgoLEFIM {
 			// === recursive call to explore larger itemsets
 	    	if(activateSubtreeUtilityPruning){
 	    		// if sub-tree utility pruning is activated, we consider primary and secondary items
+                if(prefixLength+1<maxLength)
 	    		backtrackingEFIM(transactionsPe, newItemsToKeep, newItemsToExplore,prefixLength+1);
 	    	}else{
 	    		// if sub-tree utility pruning is deactivated, we consider secondary items also
 	    		// as primary items
+                if(prefixLength+1<maxLength)
 	    		backtrackingEFIM(transactionsPe, newItemsToKeep, newItemsToKeep,prefixLength+1);
 	    	}
 		}

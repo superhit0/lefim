@@ -190,5 +190,7 @@ public class Transaction {
 		}
 	}
 
-
+	public int getTransactionLength(){
+		return items.length;
+	}
 }
