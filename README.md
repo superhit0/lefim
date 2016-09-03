@@ -1,10 +1,10 @@
 # lefim
 
 ##Build from Source:
-^ Go to Source Directory.  ^
- Install maven.
- mvn clean package.
- Get Jar from target folder
+- Go to Source Directory.
+- Install maven.
+- mvn clean package.
+- Get Jar from target folder
 
 
 ##Using jar:
