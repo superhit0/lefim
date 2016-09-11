@@ -190,7 +190,9 @@ public class Transaction {
 		}
 	}
 
+	//MANYU
 	public int getTransactionLength(){
 		return items.length;
 	}
+	//MANYU
 }

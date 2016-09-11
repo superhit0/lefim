@@ -35,7 +35,9 @@ import java.util.List;
  */
 public class AlgoLEFIM {
 
+	//MANYU
 	int minLength,maxLength;
+	//MANYU
 
 	/** the set of high-utility itemsets */
     private Itemsets highUtilityItemsets;
@@ -138,7 +140,9 @@ public class AlgoLEFIM {
 		
 		// read the input file
 		Dataset dataset = new Dataset(inputPath, maximumTransactionCount);
+		//MANYU
 		dataset.pruneSmallTransactions(minLength);
+		//MANYU
 
 		// save minUtil value selected by the user
 		this.minUtil = minUtil;
@@ -659,13 +663,17 @@ public class AlgoLEFIM {
 			// === recursive call to explore larger itemsets
 	    	if(activateSubtreeUtilityPruning){
 	    		// if sub-tree utility pruning is activated, we consider primary and secondary items
+				//MANYU
                 if(prefixLength+1<maxLength)
 	    		backtrackingEFIM(transactionsPe, newItemsToKeep, newItemsToExplore,prefixLength+1);
+				//MANYU
 	    	}else{
 	    		// if sub-tree utility pruning is deactivated, we consider secondary items also
 	    		// as primary items
+				//MANYU
                 if(prefixLength+1<maxLength)
 	    		backtrackingEFIM(transactionsPe, newItemsToKeep, newItemsToKeep,prefixLength+1);
+				//MANYU
 	    	}
 		}
 
