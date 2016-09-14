@@ -141,6 +141,7 @@ public class AlgoLEFIM {
 		// read the input file
 		Dataset dataset = new Dataset(inputPath, maximumTransactionCount);
 		//MANYU
+		//Remove transactions from database that are smaller than minLength
 		dataset.pruneSmallTransactions(minLength);
 		//MANYU
 
@@ -664,6 +665,7 @@ public class AlgoLEFIM {
 	    	if(activateSubtreeUtilityPruning){
 	    		// if sub-tree utility pruning is activated, we consider primary and secondary items
 				//MANYU
+				//Don't check for itemsets greater than maxLength
                 if(prefixLength+1<maxLength)
 	    		backtrackingEFIM(transactionsPe, newItemsToKeep, newItemsToExplore,prefixLength+1);
 				//MANYU
@@ -671,6 +673,7 @@ public class AlgoLEFIM {
 	    		// if sub-tree utility pruning is deactivated, we consider secondary items also
 	    		// as primary items
 				//MANYU
+				//Don't check for itemsets greater than maxLength
                 if(prefixLength+1<maxLength)
 	    		backtrackingEFIM(transactionsPe, newItemsToKeep, newItemsToKeep,prefixLength+1);
 				//MANYU
