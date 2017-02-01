@@ -143,6 +143,7 @@ public class AlgoLEFIM {
 		//MANYU
 		//Remove transactions from database that are smaller than minLength
 		dataset.pruneSmallTransactions(minLength);
+		dataset.calculateRevisedTransactionUtility(maxLength);
 		//MANYU
 
 		// save minUtil value selected by the user
@@ -735,7 +736,7 @@ public class AlgoLEFIM {
 			// for each item
 			for(Integer item: transaction.getItems()) {
 				// we add the transaction utility to the utility bin of the item
-				utilityBinArrayLU[item] += transaction.transactionUtility;
+				utilityBinArrayLU[item] += transaction.revisedTransactionUtility;
 			}
 		}
 	}
